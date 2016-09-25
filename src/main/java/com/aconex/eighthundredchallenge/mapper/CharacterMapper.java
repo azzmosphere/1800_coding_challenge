@@ -26,6 +26,18 @@ public class CharacterMapper {
     }
 
     /**
+     *
+     *  Retrieve the bitmap given a character.
+     *
+     * @param c
+     * @return bitmap
+     */
+    public CharacterBitmap getCharacterBitmap(char c) {
+        c = Character.toUpperCase(c);
+        return characters.get(c);
+    }
+
+    /**
      * assert if character 'c' is with in the characterbitmap
      *
      * @param c

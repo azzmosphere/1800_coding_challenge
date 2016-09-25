@@ -2,8 +2,10 @@ package com.aconex.eighthundredchallenge.mapper;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.hamcrest.CoreMatchers.is;
 /**
  * Created by aaron.spiteri on 24/09/2016.
  */
@@ -129,5 +131,35 @@ public class TestCharacterMapper {
         assertTrue(mapper.getBitMask('x') == CharacterBitmap.C_X.getBitMask());
         assertTrue(mapper.getBitMask('y') == CharacterBitmap.C_Y.getBitMask());
         assertTrue(mapper.getBitMask('z') == CharacterBitmap.C_Z.getBitMask());
+    }
+
+    @Test
+    public void shouldGetCharacterMapper() {
+        assertThat(mapper.getCharacterBitmap('a'), is(CharacterBitmap.C_A));
+        assertThat(mapper.getCharacterBitmap('b'), is(CharacterBitmap.C_B));
+        assertThat(mapper.getCharacterBitmap('c'), is(CharacterBitmap.C_C));
+        assertThat(mapper.getCharacterBitmap('d'), is(CharacterBitmap.C_D));
+        assertThat(mapper.getCharacterBitmap('e'), is(CharacterBitmap.C_E));
+        assertThat(mapper.getCharacterBitmap('f'), is(CharacterBitmap.C_F));
+        assertThat(mapper.getCharacterBitmap('g'), is(CharacterBitmap.C_G));
+        assertThat(mapper.getCharacterBitmap('h'), is(CharacterBitmap.C_H));
+        assertThat(mapper.getCharacterBitmap('i'), is(CharacterBitmap.C_I));
+        assertThat(mapper.getCharacterBitmap('j'), is(CharacterBitmap.C_J));
+        assertThat(mapper.getCharacterBitmap('k'), is(CharacterBitmap.C_K));
+        assertThat(mapper.getCharacterBitmap('l'), is(CharacterBitmap.C_L));
+        assertThat(mapper.getCharacterBitmap('m'), is(CharacterBitmap.C_M));
+        assertThat(mapper.getCharacterBitmap('n'), is(CharacterBitmap.C_N));
+        assertThat(mapper.getCharacterBitmap('o'), is(CharacterBitmap.C_O));
+        assertThat(mapper.getCharacterBitmap('p'), is(CharacterBitmap.C_P));
+        assertThat(mapper.getCharacterBitmap('q'), is(CharacterBitmap.C_Q));
+        assertThat(mapper.getCharacterBitmap('r'), is(CharacterBitmap.C_R));
+        assertThat(mapper.getCharacterBitmap('s'), is(CharacterBitmap.C_S));
+        assertThat(mapper.getCharacterBitmap('t'), is(CharacterBitmap.C_T));
+        assertThat(mapper.getCharacterBitmap('u'), is(CharacterBitmap.C_U));
+        assertThat(mapper.getCharacterBitmap('v'), is(CharacterBitmap.C_V));
+        assertThat(mapper.getCharacterBitmap('w'), is(CharacterBitmap.C_W));
+        assertThat(mapper.getCharacterBitmap('x'), is(CharacterBitmap.C_X));
+        assertThat(mapper.getCharacterBitmap('y'), is(CharacterBitmap.C_Y));
+        assertThat(mapper.getCharacterBitmap('z'), is(CharacterBitmap.C_Z));
     }
 }
