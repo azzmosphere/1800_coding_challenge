@@ -6,7 +6,7 @@ package com.aconex.eighthundredchallenge.mapper;
  * Created by aaron.spiteri on 24/09/2016.
  */
 
-public enum CharacterBitmap {
+public enum CharacterBitmap implements EightHundredBitMap {
     C_A('A', 0),
     C_B('B', 1),
     C_C('C', 2),
@@ -47,10 +47,12 @@ public enum CharacterBitmap {
      *
      * @return bitMap
      */
+    @Override
     public int getBitMask() {
         return bitMask;
     }
 
+    @Override
     public char getKey() {
         return key;
     }

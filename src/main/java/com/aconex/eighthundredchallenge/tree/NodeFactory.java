@@ -7,7 +7,12 @@ import com.aconex.eighthundredchallenge.mapper.CharacterBitmap;
  */
 public class NodeFactory {
 
-    // Inital node is the upper left most point, 0x0 on a planner graph
+    /**
+     * Create a node given a bitmap.
+     *
+     * @param bitmap
+     * @return node
+     */
     public Node createNode(CharacterBitmap bitmap) {
         Node n = new Node();
         n.setCharacterBitmap(bitmap);
@@ -15,13 +20,32 @@ public class NodeFactory {
     }
 
     public Node attachChild(Node parent, CharacterBitmap bitmap) {
-        Node c = null;
+        return attachChild(parent, bitmap, false);
+    }
+
+    /**
+     * attach a child node to a relative parent node. if the child node is the last character then create it
+     * as a sibling of the parent.
+     *
+     * @param parent
+     * @param bitmap
+     * @param lastChar
+     * @return child node.
+     */
+    public Node attachChild(Node parent, CharacterBitmap bitmap, boolean lastChar) {
+        Node c;
         if (parent.getChild() == null) {
             c = createNode(bitmap);
             parent.setChild(c);
         }
         else if (parent.getChild().getCharacterBitmap().getBitMask() == bitmap.getBitMask()) {
-            c = parent.getChild();
+            if (lastChar) {
+                parent.getChild().setSibling(createNode(bitmap));
+                c = parent.getChild().getSibling();
+            }
+            else {
+                c = parent.getChild();
+            }
         }
         else {
             c = createNode(bitmap);
@@ -32,8 +56,15 @@ public class NodeFactory {
         return c;
     }
 
+    /**
+     * Create a parent node, the first letter in the word.
+     *
+     * @param n
+     * @param bitmap
+     * @return parent node.
+     */
     public Node createParentNode(Node n, CharacterBitmap bitmap) {
-        Node parent = null;
+        Node parent;
 
         if (n == null) {
             parent = createNode(bitmap);
@@ -49,6 +80,12 @@ public class NodeFactory {
         return parent;
     }
 
+    /**
+     * Given a node 'n' find the further most parent node, first character of a given word.
+     *
+     * @param n
+     * @return grandparent node.
+     */
     public Node getGrandParent(Node n) {
         Node grandparent;
         if (n.getParent() == null) {
