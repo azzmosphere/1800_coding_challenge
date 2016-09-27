@@ -11,6 +11,7 @@ public class TestTreeParser {
 
     private static final String filename = "/Users/aaron.spiteri/tmp/dictionary.txt";
 
+    // This needs to be moved out, and we should
     @Test
     public void shouldParseDictionay() throws Exception {
         Node tree = TreeParser.createTree(filename);

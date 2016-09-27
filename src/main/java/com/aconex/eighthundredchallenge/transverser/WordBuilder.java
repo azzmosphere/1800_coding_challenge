@@ -41,4 +41,15 @@ public class WordBuilder {
         sb.append(BOUNDRY);
     }
 
+    public boolean isSlotsFilled() {
+        return (currentPos >= digitString.length());
+    }
+
+    public boolean isBoundrySet() {
+        if (sb.length() == 0) {
+            return false;
+        }
+        return (sb.charAt(sb.length() - 1) == BOUNDRY);
+    }
+
 }

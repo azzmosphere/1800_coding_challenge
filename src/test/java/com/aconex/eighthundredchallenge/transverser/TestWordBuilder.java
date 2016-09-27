@@ -63,4 +63,47 @@ public class TestWordBuilder {
 
         assertThat(wb.getWord(), is("CALL-ME"));
     }
+
+    @Test
+    public void shouldFillSlots() {
+        String digitString = "2255";
+        WordBuilder wb = new WordBuilder(digitString, dmapper);
+
+        assertTrue(wb.append(CharacterBitmap.C_C));
+        assertTrue(wb.append(CharacterBitmap.C_A));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+
+        assertTrue(wb.isSlotsFilled());
+    }
+
+    @Test
+    public void shouldNotFillSlots() {
+        String digitString = "225563";
+        WordBuilder wb = new WordBuilder(digitString, dmapper);
+
+        assertTrue(wb.append(CharacterBitmap.C_C));
+        assertTrue(wb.append(CharacterBitmap.C_A));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+
+        assertFalse(wb.isSlotsFilled());
+    }
+
+    @Test
+    public void shouldDetectBoundry() {
+        String digitString = "225563";
+        WordBuilder wb = new WordBuilder(digitString, dmapper);
+
+        assertTrue(wb.append(CharacterBitmap.C_C));
+        assertTrue(wb.append(CharacterBitmap.C_A));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+        assertTrue(wb.append(CharacterBitmap.C_L));
+
+        assertFalse(wb.isBoundrySet());
+        wb.setBoundry();
+        assertTrue(wb.isBoundrySet());
+
+        assertFalse(wb.isSlotsFilled());
+    }
 }
