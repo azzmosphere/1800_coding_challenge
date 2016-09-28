@@ -43,4 +43,27 @@ public class TestEightHundredParser {
 
     }
 
+    @Test
+    public void shouldTransverseSibling() {
+        String[] dictionary = {"ME", "CALL"};
+        String digitString = "2255";
+        EightHundredParser parser = new EightHundredParser();
+
+        parser.parse(digitString, createTree(dictionary));
+        assertThat(parser.getWords()[0], is("CALL"));
+    }
+
+
+    @Test
+    public void shouldTransverseSibling2() {
+        String[] dictionary = {"CALL", "CALK"};
+        String digitString = "2255";
+        EightHundredParser parser = new EightHundredParser();
+
+        parser.parse(digitString, createTree(dictionary));
+
+
+        assertThat(parser.getWords()[0], is("CALL"));
+    }
+
 }

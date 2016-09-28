@@ -12,6 +12,30 @@ public class EightHundredParser {
     private ArrayList<String> words = new ArrayList<>();
     private DigitMapper mapper = new DigitMapper();
     Node root;
+    private enum NODE_DIRECTION {
+        SIBLING {
+            @Override
+            public Node getDirection(Node n) {
+                return n.getSibling();
+            }
+        },
+        CHILD {
+            @Override
+            public Node getDirection(Node n) {
+                return n.getChild();
+            }
+        },
+        PARENT {
+            @Override
+            public Node getDirection(Node n) {
+                return n.getParent();
+            }
+        };
+
+        public Node getDirection(Node n) {
+            return null;
+        }
+    };
 
     public String preParse(String ph) {
         StringBuilder sb = new StringBuilder();
@@ -30,24 +54,47 @@ public class EightHundredParser {
         transverse(wb, tree);
     }
 
-    private void transverseChild(WordBuilder wb, Node currentNode) {
+    /**
+     * Tranverses the tree in a specific direction, that is specified by
+     *
+     * @param wb
+     * @param currentNode
+     * @param nextNode
+     */
+    private boolean transverseDirection(WordBuilder wb, Node currentNode, NODE_DIRECTION nextNode) {
         if (currentNode == null)  {
+            return true;
+        }
+        else if (wb.isSlotsFilled()) {
+            return false;
+        }
+        else if (!wb.append(currentNode.getCharacterBitmap())) {
+            return false;
+        }
+        return transverseDirection(wb, nextNode.getDirection(currentNode), nextNode);
+    }
+
+    /**
+     * Transverses tree, searches children first, then searches
+     * siblings
+     *
+     * @param wb
+     * @param currentNode
+     */
+    private void transverse(WordBuilder wb, Node currentNode) {
+        if (transverseDirection(wb, currentNode, NODE_DIRECTION.CHILD)) {
             if (wb.isSlotsFilled()) {
                 words.add(wb.getWord());
             }
-            return;
+            else {
+                wb.setBoundry();
+                currentNode = root;
+            }
         }
-        else if (wb.isSlotsFilled()) {
-            return;
-        }
-        else if (!wb.append(currentNode.getCharacterBitmap())) {
-            return;
-        }
-        transverse(wb, currentNode.getChild());
-    }
 
-    private void transverse(WordBuilder wb, Node currentNode) {
-        transverseChild(wb, currentNode);
+        if (!transverseDirection(wb, currentNode, NODE_DIRECTION.SIBLING)) {
+            transverse(wb, currentNode.getSibling());
+        }
     }
 
     public String[] getWords() {
