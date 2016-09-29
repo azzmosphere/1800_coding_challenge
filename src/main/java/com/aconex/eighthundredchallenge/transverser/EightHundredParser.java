@@ -30,24 +30,25 @@ public class EightHundredParser {
         transverse(wb, tree);
     }
 
-    private void transverseChild(WordBuilder wb, Node currentNode) {
-        if (currentNode == null)  {
-            if (wb.isSlotsFilled()) {
-                words.add(wb.getWord());
-            }
-            return;
-        }
-        else if (wb.isSlotsFilled()) {
-            return;
-        }
-        else if (!wb.append(currentNode.getCharacterBitmap())) {
-            return;
-        }
-        transverse(wb, currentNode.getChild());
-    }
-
     private void transverse(WordBuilder wb, Node currentNode) {
-        transverseChild(wb, currentNode);
+        if (currentNode == null)  {
+            words.add(wb.getWord());
+            return;
+        }
+
+        System.out.println(currentNode.getCharacterBitmap().getKey());
+
+        if (currentNode.getSibling() != null) {
+            transverse(WordBuilderFactory.cloneWordBuilder(wb), currentNode.getSibling());
+        }
+
+        if (wb.isSlotsFilled()) {
+            return;
+        }
+
+        else if (wb.append(currentNode.getCharacterBitmap())) {
+            transverse(wb, currentNode.getChild());
+        }
     }
 
     public String[] getWords() {

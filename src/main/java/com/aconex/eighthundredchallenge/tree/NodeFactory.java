@@ -19,27 +19,24 @@ public class NodeFactory {
         return n;
     }
 
-    public Node attachChild(Node parent, CharacterBitmap bitmap) {
-        return attachChild(parent, bitmap, false);
-    }
-
     /**
      * attach a child node to a relative parent node. if the child node is the last character then create it
      * as a sibling of the parent.
      *
      * @param parent
      * @param bitmap
-     * @param lastChar
      * @return child node.
      */
-    public Node attachChild(Node parent, CharacterBitmap bitmap, boolean lastChar) {
+    public Node attachChild(Node parent, CharacterBitmap bitmap) {
         Node c;
         if (parent.getChild() == null) {
             c = createNode(bitmap);
             parent.setChild(c);
         }
         else if (parent.getChild().getCharacterBitmap().getBitMask() == bitmap.getBitMask()) {
-            if (lastChar) {
+
+            // word has ended.
+            if (parent.getChild().getChild() == null) {
                 parent.getChild().setSibling(createNode(bitmap));
                 c = parent.getChild().getSibling();
             }

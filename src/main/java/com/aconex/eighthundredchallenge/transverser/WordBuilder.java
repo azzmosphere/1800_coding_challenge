@@ -18,6 +18,13 @@ public class WordBuilder {
         this.mapper = mapper;
     }
 
+    public WordBuilder(String digitString, Mapper mapper, String word) {
+        this.digitString = digitString;
+        this.mapper = mapper;
+        sb.append(word);
+        currentPos = word.length() - 1;
+    }
+
     public boolean append(EightHundredBitMap cbm) {
         if (currentPos >= digitString.length()) {
             return false;
@@ -50,6 +57,14 @@ public class WordBuilder {
             return false;
         }
         return (sb.charAt(sb.length() - 1) == BOUNDRY);
+    }
+
+    public Mapper getMapper() {
+        return mapper;
+    }
+
+    public String getDigitString() {
+        return digitString;
     }
 
 }

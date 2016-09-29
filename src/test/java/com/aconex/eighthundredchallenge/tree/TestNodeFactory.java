@@ -19,28 +19,7 @@ public class TestNodeFactory {
     @Test
     public void shouldMapWord1() {
         String words[] = {"CALL", "CAT", "ME"};
-        boolean foundInitial = false;
-        Node n = null, initial = null;
-
-        for (String word : words) {
-            for (char c : word.toCharArray()) {
-                CharacterBitmap bitmap = mapper.getCharacterBitmap(c);
-
-                if (!foundInitial) {
-                    n = factory.createParentNode(n, bitmap);
-                    foundInitial = true;
-
-                    if (initial == null) {
-                        initial = n;
-                    }
-                }
-                else {
-                    n = factory.attachChild(n, bitmap);
-                }
-            }
-            n = factory.getGrandParent(n);
-            foundInitial = false;
-        }
+        Node n, initial = createTree(words);
 
         // Word is "CALL"
         assertThat(initial.getCharacterBitmap(), is(CharacterBitmap.C_C));
@@ -60,6 +39,53 @@ public class TestNodeFactory {
         // Word is "CAT"
         n = initial.getChild().getChild().getSibling();
         assertThat(n.getCharacterBitmap(), is(CharacterBitmap.C_T));
+    }
+
+    @Test
+    public void shouldCreateSibling() {
+        String words[] = {"CALL", "CALLED"};
+        Node n, initial = createTree(words);
+
+        // Word is "CALL"
+        assertThat(initial.getCharacterBitmap(), is(CharacterBitmap.C_C));
+        n = initial.getChild();
+        assertThat(n.getCharacterBitmap(), is(CharacterBitmap.C_A));
+        n = n.getChild();
+        assertThat(n.getCharacterBitmap(), is(CharacterBitmap.C_L));
+        n = n.getChild();
+        assertThat(n.getCharacterBitmap(), is(CharacterBitmap.C_L));
+
+        n = n.getSibling();
+        assertThat(n.getCharacterBitmap(), is(CharacterBitmap.C_L));
+    }
+
+    private Node createTree(String[] words) {
+        Node initial = null, n = null;
+        boolean foundInitial = false;
+
+        for (String word : words) {
+            int i = 0;
+            for (char c : word.toCharArray()) {
+                i++;
+                CharacterBitmap bitmap = mapper.getCharacterBitmap(c);
+
+                if (!foundInitial) {
+                    n = factory.createParentNode(n, bitmap);
+                    foundInitial = true;
+
+                    if (initial == null) {
+                        initial = n;
+                    }
+                } else if (i == word.length()) {
+                    n = factory.attachChild(n, bitmap);
+                } else {
+                    n = factory.attachChild(n, bitmap);
+                }
+            }
+            n = factory.getGrandParent(n);
+            foundInitial = false;
+        }
+        return initial;
     }
 
 }

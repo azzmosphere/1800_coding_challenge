@@ -1,8 +1,11 @@
 package com.aconex.eighthundredchallenge.tree;
 
+import com.aconex.eighthundredchallenge.mapper.CharacterBitmap;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
 /**
  * Created by aaron.spiteri on 25/09/2016.
@@ -13,10 +16,27 @@ public class TestTreeParser {
 
     // This needs to be moved out, and we should
     @Test
-    public void shouldParseDictionay() throws Exception {
+    public void shouldParseDictionary() throws Exception {
         Node tree = TreeParser.createTree(filename);
 
         assertTrue(true);
+    }
+
+
+    @Test
+    public void shouldParseDictionaryObjects() throws Exception {
+        String[] dictionary = {"CALL", "ME", "CALL ME"};
+        Node tree = TreeParser.createTree(dictionary);
+
+        assertThat(tree.getCharacterBitmap(), is(CharacterBitmap.C_C));
+        assertThat(tree.getChild().getCharacterBitmap(), is(CharacterBitmap.C_A));
+        assertThat(tree.getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_L));
+        assertThat(tree.getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_L));
+        assertThat(tree.getChild().getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_M));
+        assertThat(tree.getChild().getChild().getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_E));
+
+        assertThat(tree.getSibling().getCharacterBitmap(), is(CharacterBitmap.C_M));
+        assertThat(tree.getSibling().getChild().getCharacterBitmap(), is(CharacterBitmap.C_E));
     }
 
 }

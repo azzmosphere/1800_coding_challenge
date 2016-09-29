@@ -55,7 +55,7 @@ public class TreeFactory {
             // The last letter of a word could be a sibling or a child, the factory
             // will need to test for this.
             if (i == word.length()) {
-                n = factory.attachChild(n, mapper.getCharacterBitmap(c), true);
+                n = factory.attachChild(n, mapper.getCharacterBitmap(c));
                 continue;
             }
 

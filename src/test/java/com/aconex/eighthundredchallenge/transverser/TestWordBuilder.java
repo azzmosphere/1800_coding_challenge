@@ -106,4 +106,13 @@ public class TestWordBuilder {
 
         assertFalse(wb.isSlotsFilled());
     }
+
+    @Test
+    public void shouldSetAndGet() {
+        String digitString = "225563";
+        WordBuilder wb = new WordBuilder(digitString, dmapper);
+
+        assertThat(wb.getDigitString(), is("225563"));
+        assertThat(wb.getMapper(), is(dmapper));
+    }
 }

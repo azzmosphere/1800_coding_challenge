@@ -7,3 +7,6 @@ gradlew.bat
 settings.gradle
 *.iml
 *.ipr
+build/*
+out/*
+*.iws
