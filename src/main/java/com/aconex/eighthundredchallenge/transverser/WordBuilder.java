@@ -26,18 +26,22 @@ public class WordBuilder {
     }
 
     public boolean append(EightHundredBitMap cbm) {
-        if (currentPos >= digitString.length()) {
-            return false;
-        }
-
-        EightHundredBitMap bm = (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(currentPos));
-        if ((cbm.getBitMask() & bm.getBitMask()) > 0) {
+        if (isMatch(cbm)) {
             sb.append(cbm.getKey());
             currentPos++;
 
             return true;
         }
         return false;
+    }
+
+    public boolean isMatch(EightHundredBitMap cbm) {
+        if (currentPos >= digitString.length()) {
+            return false;
+        }
+
+        EightHundredBitMap bm = (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(currentPos));
+        return ((cbm.getBitMask() & bm.getBitMask()) > 0);
     }
 
     public String getWord() {

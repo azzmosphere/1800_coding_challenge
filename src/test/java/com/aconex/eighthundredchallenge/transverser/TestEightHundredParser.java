@@ -1,6 +1,7 @@
 package com.aconex.eighthundredchallenge.transverser;
 
 import org.junit.Test;
+import com.aconex.eighthundredchallenge.tree.Node;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -47,9 +48,10 @@ public class TestEightHundredParser {
         EightHundredParser parser = new EightHundredParser();
         String[] dictionary = {"CALL", "CALK", "CALJ", "CDLL"};
         String digitString = "2255";
-        parser.parse(digitString, createTree(dictionary));
+        Node tree = createTree(dictionary);
+        parser.parse(digitString, tree);
 
-        //assertThat(parser.getWords()[0], is("CALL"));
+        assertThat(parser.getWords()[0], is("CALL"));
         //assertThat(parser.getWords()[1], is("CALK"));
     }
 }

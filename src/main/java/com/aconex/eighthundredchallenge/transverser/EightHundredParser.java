@@ -5,6 +5,9 @@ import com.aconex.eighthundredchallenge.tree.Node;
 
 import java.util.ArrayList;
 
+import static com.aconex.eighthundredchallenge.transverser.WordBuilderFactory.cloneWordBuilder;
+import static com.aconex.eighthundredchallenge.transverser.WordBuilderFactory.createWordBuilder;
+
 /**
  * Created by aaron.spiteri on 26/09/2016.
  */
@@ -26,7 +29,7 @@ public class EightHundredParser {
     public void parse(String ph, Node tree) {
         ph = preParse(ph);
         root = tree;
-        WordBuilder wb = new WordBuilder(ph, mapper);
+        WordBuilder wb = createWordBuilder(ph, mapper);
         transverse(wb, tree);
     }
 
@@ -36,10 +39,8 @@ public class EightHundredParser {
             return;
         }
 
-        System.out.println(currentNode.getCharacterBitmap().getKey());
-
         if (currentNode.getSibling() != null) {
-            transverse(WordBuilderFactory.cloneWordBuilder(wb), currentNode.getSibling());
+            transverse(cloneWordBuilder(wb), currentNode.getSibling());
         }
 
         if (wb.isSlotsFilled()) {

@@ -37,19 +37,29 @@ public class NodeFactory {
 
             // word has ended.
             if (parent.getChild().getChild() == null) {
-                parent.getChild().setSibling(createNode(bitmap));
-                c = parent.getChild().getSibling();
+                c = setSibling(parent.getChild(), bitmap);
             }
             else {
                 c = parent.getChild();
             }
         }
         else {
-            c = createNode(bitmap);
-            parent.getChild().setSibling(c);
+            c = setSibling(parent.getChild(), bitmap);
         }
         c.setParent(parent);
 
+        return c;
+    }
+
+    private Node setSibling(Node child, CharacterBitmap bitmap) {
+        Node c = null;
+        if (child.getSibling() == null) {
+            child.setSibling(createNode(bitmap));
+            c = child.getSibling();
+        }
+        else {
+            c = setSibling(child.getSibling(), bitmap);
+        }
         return c;
     }
 
@@ -70,8 +80,9 @@ public class NodeFactory {
             parent = n;
         }
         else {
-            parent = createNode(bitmap);
-            n.setSibling(parent);
+//            parent = createNode(bitmap);
+//            n.setSibling(parent);
+            parent = setSibling(n, bitmap);
         }
 
         return parent;
