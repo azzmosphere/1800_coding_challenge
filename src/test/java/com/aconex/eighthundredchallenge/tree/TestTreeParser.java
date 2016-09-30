@@ -32,11 +32,6 @@ public class TestTreeParser {
         assertThat(tree.getChild().getCharacterBitmap(), is(CharacterBitmap.C_A));
         assertThat(tree.getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_L));
         assertThat(tree.getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_L));
-        assertThat(tree.getChild().getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_M));
-        assertThat(tree.getChild().getChild().getChild().getChild().getChild().getCharacterBitmap(), is(CharacterBitmap.C_E));
-
-        assertThat(tree.getSibling().getCharacterBitmap(), is(CharacterBitmap.C_M));
-        assertThat(tree.getSibling().getChild().getCharacterBitmap(), is(CharacterBitmap.C_E));
     }
 
 }

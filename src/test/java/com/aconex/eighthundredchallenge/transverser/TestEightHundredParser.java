@@ -24,7 +24,6 @@ public class TestEightHundredParser {
 
     @Test
     public void shouldTransverseChild() {
-        // String[] dictionary = {"CALL", "ME", "CALLME"};
         EightHundredParser parser = new EightHundredParser();
         String[] dictionary = {"CALK"};
         String digitString = "2255";
@@ -51,7 +50,17 @@ public class TestEightHundredParser {
         Node tree = createTree(dictionary);
         parser.parse(digitString, tree);
 
-        assertThat(parser.getWords()[0], is("CALL"));
-        //assertThat(parser.getWords()[1], is("CALK"));
+        assertThat(parser.getWords()[0], is("CALJ"));
+        assertThat(parser.getWords()[1], is("CALK"));
+        assertThat(parser.getWords()[2], is("CALL"));
     }
+
+//    @Test
+//    public void shouldSetBoundry() {
+//        EightHundredParser parser = new EightHundredParser();
+//        String[] dictionary = {"CALL", "CALLME", "ME", "CDLL"};
+//        String digitString = "2255.63";
+//        Node tree = createTree(dictionary);
+//        parser.parse(digitString, tree);
+//    }
 }
