@@ -6,5 +6,4 @@ package com.aconex.eighthundredchallenge.mapper;
 public interface EightHundredBitMap {
     int getBitMask();
     char getKey();
-
 }

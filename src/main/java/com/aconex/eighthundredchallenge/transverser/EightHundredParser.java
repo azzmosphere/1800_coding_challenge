@@ -1,7 +1,6 @@
 package com.aconex.eighthundredchallenge.transverser;
 
 import com.aconex.eighthundredchallenge.mapper.DigitMapper;
-import com.aconex.eighthundredchallenge.mapper.EightHundredBitMap;
 import com.aconex.eighthundredchallenge.tree.Node;
 
 import java.util.ArrayList;
@@ -46,17 +45,22 @@ public class EightHundredParser {
         // and traverse skipping to the next charater.
         if (wb.isBoundrySet()) {
             wb.removeLastBoundry();
-
-            if (!mapper.hasChar(wb.getLastChar())) {
-                EightHundredBitMap bm = wb.currentDigit();
-                wb.append(bm);
-                transverse(wb, currentNode);
-
-                if (wb.isLastChar(bm.getKey())) {
-                    wb.removeLastBoundry();
-                }
-            }
         }
+    }
+
+
+//    if (!mapper.hasChar(wb.getLastChar())) {
+//        EightHundredBitMap bm = wb.currentDigit();
+//        wb.append(bm);
+//        transverse(wb, currentNode);
+//
+//        if (wb.isLastChar(bm.getKey())) {
+//            wb.removeLastBoundry();
+//        }
+//    }
+
+    private boolean append(WordBuilder wb, Node currentNode) {
+        return wb.append(currentNode.getCharacterBitmap());
     }
 
     private void transverse(WordBuilder wb, Node currentNode) {
@@ -76,7 +80,7 @@ public class EightHundredParser {
         if (wb.isSlotsFilled()) {
             return;
         }
-        else if (wb.append(currentNode.getCharacterBitmap())) {
+        else if (append(wb, currentNode)) {
             transverse(wb, currentNode.getChild());
         }
     }
