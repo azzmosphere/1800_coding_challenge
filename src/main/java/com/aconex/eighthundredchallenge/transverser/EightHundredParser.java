@@ -51,7 +51,9 @@ public class EightHundredParser {
             if (!wb.isSlotsFilled()) {
                 transverseSetBoundry(wb, root);
             }
-            words.add(wb.getWord());
+            else {
+                words.add(wb.getWord());
+            }
             return;
         }
 

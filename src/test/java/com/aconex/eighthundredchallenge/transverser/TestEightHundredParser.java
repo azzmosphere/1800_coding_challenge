@@ -63,6 +63,8 @@ public class TestEightHundredParser {
         Node tree = createTree(dictionary);
         parser.parse(digitString, tree);
 
-        assertThat("test", is("test"));
+
+        assertThat(parser.getWords()[0], is("CALLME"));
+        assertThat(parser.getWords()[1], is("CALL-ME"));
     }
 }
