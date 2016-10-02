@@ -5,8 +5,11 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'checkstyle'
 apply plugin: 'maven'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
+version = '1.0.0'
+mainClassName = "com.aconex.eighthundredchallenge.EightHundredChallenge"
 
 repositories {
     mavenCentral()
@@ -16,3 +19,23 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10.19'
 }
+
+jar {
+    from files(sourceSets.main.output.classesDir)
+    from {configurations.compile.collect {zipTree(it)}} {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    manifest {
+        attributes(
+                'Implementation-Title': 'Eight Hundred Challenge',
+                'Implementation-Version': version,
+                'Built-By': 'azzmosphere@gmail.com',
+                'Built-Date': new Date(),
+                'Built-JDK': sourceCompatibility,
+                'Main-Class': mainClassName
+        )
+    }
+}
+
