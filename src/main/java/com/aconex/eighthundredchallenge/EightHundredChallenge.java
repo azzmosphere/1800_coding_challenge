@@ -24,9 +24,8 @@ public class EightHundredChallenge {
     private void process() {
         try {
             Node tree = createTree(dictionaryFile);
-            EightHundredParser parser = new EightHundredParser();
-
             for (String number : numbers) {
+                EightHundredParser parser = new EightHundredParser();
                 parser.parse(number, tree);
 
                 System.out.println("Words for number :" + number);
@@ -34,8 +33,8 @@ public class EightHundredChallenge {
                 for (String word : parser.getWords()) {
                     System.out.println(word);
                 }
+                System.out.println();
             }
-            System.out.println();
         }
         catch (TreeParserException ex) {
             System.out.println("ERROR: Dictionary file can not be read");
