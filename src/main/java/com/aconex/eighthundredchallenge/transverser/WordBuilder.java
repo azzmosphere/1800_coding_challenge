@@ -27,6 +27,11 @@ public class WordBuilder {
         sb.append(word);
     }
 
+    public boolean appendForce(EightHundredBitMap cbm) {
+        sb.append(cbm.getKey());
+        return true;
+    }
+
     public boolean append(EightHundredBitMap cbm) {
         if (isMatch(cbm)) {
             sb.append(cbm.getKey());
@@ -67,6 +72,11 @@ public class WordBuilder {
     }
 
     public char getLastChar() {
+        char c = '\u0000';
+        if (sb.length() < 1) {
+            return c;
+        }
+
         return sb.charAt(sb.length() - 1);
     }
 

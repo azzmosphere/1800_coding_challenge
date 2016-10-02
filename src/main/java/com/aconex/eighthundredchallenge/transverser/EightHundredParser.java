@@ -40,27 +40,22 @@ public class EightHundredParser {
 
         transverse(wb, currentNode);
 
-        // Remove the last boundry if it exists.
-        // this indicates that no match could be found, at this point we can append the digit value to the word builder
-        // and traverse skipping to the next charater.
         if (wb.isBoundrySet()) {
             wb.removeLastBoundry();
         }
     }
 
-
-//    if (!mapper.hasChar(wb.getLastChar())) {
-//        EightHundredBitMap bm = wb.currentDigit();
-//        wb.append(bm);
-//        transverse(wb, currentNode);
-//
-//        if (wb.isLastChar(bm.getKey())) {
-//            wb.removeLastBoundry();
-//        }
-//    }
-
     private boolean append(WordBuilder wb, Node currentNode) {
-        return wb.append(currentNode.getCharacterBitmap());
+        if (!wb.append(currentNode.getCharacterBitmap())) {
+
+            if (!wb.isSlotsFilled() && wb.currentDigit().getBitMask() == 0) {
+                wb.appendForce(wb.currentDigit());
+                return wb.append(currentNode.getCharacterBitmap());
+            }
+
+            return false;
+        }
+        return true;
     }
 
     private void transverse(WordBuilder wb, Node currentNode) {
