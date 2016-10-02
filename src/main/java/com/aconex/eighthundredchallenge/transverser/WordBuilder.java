@@ -7,11 +7,14 @@ import com.aconex.eighthundredchallenge.mapper.Mapper;
  * Created by aaron.spiteri on 27/09/2016.
  */
 public class WordBuilder {
-    private int currentPos;
     private StringBuilder sb = new StringBuilder();
     private String digitString;
     private Mapper mapper;
     private static final char BOUNDRY = '-';
+
+    public int getCurrentPos() {
+        return (sb.length() > 0) ? sb.toString().replace("" + BOUNDRY, "").length() : 0;
+    }
 
     public WordBuilder(String digitString, Mapper mapper) {
         this.digitString = digitString;
@@ -22,25 +25,22 @@ public class WordBuilder {
         this.digitString = digitString;
         this.mapper = mapper;
         sb.append(word);
-        currentPos = word.length() - 1;
     }
 
     public boolean append(EightHundredBitMap cbm) {
         if (isMatch(cbm)) {
             sb.append(cbm.getKey());
-            currentPos++;
-
             return true;
         }
         return false;
     }
 
     public boolean isMatch(EightHundredBitMap cbm) {
-        if (currentPos >= digitString.length()) {
+        if (getCurrentPos() >= digitString.length()) {
             return false;
         }
 
-        EightHundredBitMap bm = (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(currentPos));
+        EightHundredBitMap bm = (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(getCurrentPos()));
         return ((cbm.getBitMask() & bm.getBitMask()) > 0);
     }
 
@@ -53,7 +53,7 @@ public class WordBuilder {
     }
 
     public boolean isSlotsFilled() {
-        return (currentPos >= digitString.length());
+        return (getCurrentPos() >= digitString.length());
     }
 
     public boolean isBoundrySet() {
@@ -69,6 +69,10 @@ public class WordBuilder {
 
     public String getDigitString() {
         return digitString;
+    }
+
+    public void removeLastBoundry() {
+        sb.deleteCharAt(sb.length() - 1);
     }
 
 }

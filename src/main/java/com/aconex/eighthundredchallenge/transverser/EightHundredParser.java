@@ -33,13 +33,29 @@ public class EightHundredParser {
         transverse(wb, tree);
     }
 
+    private void transverseSetBoundry(WordBuilder wb, Node currentNode) {
+        if (!wb.isBoundrySet()) {
+            wb.setBoundry();
+        }
+
+        transverse(wb, currentNode);
+
+        // Remove the last boundry if it exists.
+        if (wb.isBoundrySet()) {
+            wb.removeLastBoundry();
+        }
+    }
+
     private void transverse(WordBuilder wb, Node currentNode) {
         if (currentNode == null)  {
+            if (!wb.isSlotsFilled()) {
+                transverseSetBoundry(wb, root);
+            }
             words.add(wb.getWord());
             return;
         }
 
-        if (currentNode.getSibling() != null) {
+        else if (currentNode.getSibling() != null) {
             transverse(cloneWordBuilder(wb), currentNode.getSibling());
         }
 

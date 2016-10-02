@@ -11,6 +11,7 @@ public class WordBuilderFactory {
     }
 
     public static WordBuilder cloneWordBuilder(WordBuilder wb) {
+
         return new WordBuilder(wb.getDigitString(), wb.getMapper(), wb.getWord());
     }
 

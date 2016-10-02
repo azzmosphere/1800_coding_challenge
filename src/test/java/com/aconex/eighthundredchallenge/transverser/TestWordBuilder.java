@@ -103,8 +103,11 @@ public class TestWordBuilder {
         assertFalse(wb.isBoundrySet());
         wb.setBoundry();
         assertTrue(wb.isBoundrySet());
-
         assertFalse(wb.isSlotsFilled());
+
+        assertTrue(wb.append(CharacterBitmap.C_M));
+        assertTrue(wb.append(CharacterBitmap.C_E));
+        assertTrue(wb.isSlotsFilled());
     }
 
     @Test

@@ -55,12 +55,14 @@ public class TestEightHundredParser {
         assertThat(parser.getWords()[2], is("CALL"));
     }
 
-//    @Test
-//    public void shouldSetBoundry() {
-//        EightHundredParser parser = new EightHundredParser();
-//        String[] dictionary = {"CALL", "CALLME", "ME", "CDLL"};
-//        String digitString = "2255.63";
-//        Node tree = createTree(dictionary);
-//        parser.parse(digitString, tree);
-//    }
+    @Test
+    public void shouldSetBoundry() {
+        EightHundredParser parser = new EightHundredParser();
+        String[] dictionary = {"CALL", "CALLME", "ME", "CDLL"};
+        String digitString = "2255.63";
+        Node tree = createTree(dictionary);
+        parser.parse(digitString, tree);
+
+        assertThat("test", is("test"));
+    }
 }
