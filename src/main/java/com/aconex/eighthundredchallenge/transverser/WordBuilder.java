@@ -35,13 +35,16 @@ public class WordBuilder {
         return false;
     }
 
+    public EightHundredBitMap currentDigit() {
+        return (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(getCurrentPos()));
+    }
+
     public boolean isMatch(EightHundredBitMap cbm) {
         if (getCurrentPos() >= digitString.length()) {
             return false;
         }
 
-        EightHundredBitMap bm = (EightHundredBitMap) mapper.getCharacterBitmap(digitString.charAt(getCurrentPos()));
-        return ((cbm.getBitMask() & bm.getBitMask()) > 0);
+        return ((cbm.getBitMask() & currentDigit().getBitMask()) > 0);
     }
 
     public String getWord() {
@@ -56,11 +59,19 @@ public class WordBuilder {
         return (getCurrentPos() >= digitString.length());
     }
 
-    public boolean isBoundrySet() {
+    public boolean isLastChar(char c) {
         if (sb.length() == 0) {
             return false;
         }
-        return (sb.charAt(sb.length() - 1) == BOUNDRY);
+        return (getLastChar() == c);
+    }
+
+    public char getLastChar() {
+        return sb.charAt(sb.length() - 1);
+    }
+
+    public boolean isBoundrySet() {
+        return isLastChar(BOUNDRY);
     }
 
     public Mapper getMapper() {

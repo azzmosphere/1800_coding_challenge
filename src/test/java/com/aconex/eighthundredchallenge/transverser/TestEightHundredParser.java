@@ -67,4 +67,17 @@ public class TestEightHundredParser {
         assertThat(parser.getWords()[0], is("CALLME"));
         assertThat(parser.getWords()[1], is("CALL-ME"));
     }
+
+    @Test
+    public void shouldSetDigit() {
+        EightHundredParser parser = new EightHundredParser();
+        String[] dictionary = {"CALLME"};
+        String digitString = "22551.63";
+        Node tree = createTree(dictionary);
+        parser.parse(digitString, tree);
+
+
+        assertThat(parser.getWords()[0], is("CALL1ME"));
+
+    }
 }

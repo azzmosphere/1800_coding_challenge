@@ -1,6 +1,7 @@
 package com.aconex.eighthundredchallenge.transverser;
 
 import com.aconex.eighthundredchallenge.mapper.DigitMapper;
+import com.aconex.eighthundredchallenge.mapper.EightHundredBitMap;
 import com.aconex.eighthundredchallenge.tree.Node;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import static com.aconex.eighthundredchallenge.transverser.WordBuilderFactory.cr
 public class EightHundredParser {
     private ArrayList<String> words = new ArrayList<>();
     private DigitMapper mapper = new DigitMapper();
-    Node root;
+    private Node root;
 
     public String preParse(String ph) {
         StringBuilder sb = new StringBuilder();
@@ -41,13 +42,25 @@ public class EightHundredParser {
         transverse(wb, currentNode);
 
         // Remove the last boundry if it exists.
+        // this indicates that no match could be found, at this point we can append the digit value to the word builder
+        // and traverse skipping to the next charater.
         if (wb.isBoundrySet()) {
             wb.removeLastBoundry();
+
+            if (!mapper.hasChar(wb.getLastChar())) {
+                EightHundredBitMap bm = wb.currentDigit();
+                wb.append(bm);
+                transverse(wb, currentNode);
+
+                if (wb.isLastChar(bm.getKey())) {
+                    wb.removeLastBoundry();
+                }
+            }
         }
     }
 
     private void transverse(WordBuilder wb, Node currentNode) {
-        if (currentNode == null)  {
+        if (currentNode == null) {
             if (!wb.isSlotsFilled()) {
                 transverseSetBoundry(wb, root);
             }
@@ -56,7 +69,6 @@ public class EightHundredParser {
             }
             return;
         }
-
         else if (currentNode.getSibling() != null) {
             transverse(cloneWordBuilder(wb), currentNode.getSibling());
         }
@@ -64,7 +76,6 @@ public class EightHundredParser {
         if (wb.isSlotsFilled()) {
             return;
         }
-
         else if (wb.append(currentNode.getCharacterBitmap())) {
             transverse(wb, currentNode.getChild());
         }
