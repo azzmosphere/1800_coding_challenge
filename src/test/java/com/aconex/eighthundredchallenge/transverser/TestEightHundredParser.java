@@ -50,9 +50,9 @@ public class TestEightHundredParser {
         Node tree = createTree(dictionary);
         parser.parse(digitString, tree);
 
-        assertThat(parser.getWords()[0], is("CALJ"));
+        assertThat(parser.getWords()[0], is("CALL"));
         assertThat(parser.getWords()[1], is("CALK"));
-        assertThat(parser.getWords()[2], is("CALL"));
+        assertThat(parser.getWords()[2], is("CALJ"));
     }
 
     @Test
@@ -100,5 +100,17 @@ public class TestEightHundredParser {
         parser.parse(digitString, tree);
 
         assertThat(parser.getWords()[0], is("C0ALL1ME"));
+    }
+
+    @Test
+    public void shouldFindAllWords() {
+        EightHundredParser parser = new EightHundredParser();
+        String[] dictionary = {"CALL ME", "CALL", "ME"};
+        String digitString = "2255.63";
+        Node tree = createTree(dictionary);
+        parser.parse(digitString, tree);
+
+        assertThat(parser.getWords()[0], is("CALLME"));
+        assertThat(parser.getWords()[1], is("CALL-ME"));
     }
 }

@@ -4,6 +4,7 @@ import com.aconex.eighthundredchallenge.exceptions.TreeParserException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * Created by aaron.spiteri on 25/09/2016.
@@ -39,6 +40,7 @@ public class TreeParser {
         TreeFactory tfactory = new TreeFactory();
         boolean treeCreated = false;
         Node tree = null;
+        Arrays.sort(objects);
 
         for (Object wordObject : objects) {
             String word = (String) wordObject;
