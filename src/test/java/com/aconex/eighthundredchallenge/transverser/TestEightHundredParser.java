@@ -113,4 +113,16 @@ public class TestEightHundredParser {
         assertThat(parser.getWords()[0], is("CALLME"));
         assertThat(parser.getWords()[1], is("CALL-ME"));
     }
+
+    @Test
+    public void shouldFindAllWords2() {
+        EightHundredParser parser = new EightHundredParser();
+        String[] dictionary = {"CALL ME", "CALL ME", "CALL", "ME"};
+        String digitString = "2255.63";
+        Node tree = createTree(dictionary);
+        parser.parse(digitString, tree);
+
+        assertThat(parser.getWords()[0], is("CALLME"));
+        assertThat(parser.getWords()[1], is("CALL-ME"));
+    }
 }
