@@ -80,8 +80,6 @@ public class NodeFactory {
             parent = n;
         }
         else {
-//            parent = createNode(bitmap);
-//            n.setSibling(parent);
             parent = setSibling(n, bitmap);
         }
 

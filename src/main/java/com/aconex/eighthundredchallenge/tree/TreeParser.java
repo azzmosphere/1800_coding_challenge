@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
+ * Parse string objects to the tree factory.
+ *
  * Created by aaron.spiteri on 25/09/2016.
  */
 public class TreeParser {

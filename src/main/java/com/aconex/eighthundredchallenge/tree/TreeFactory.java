@@ -3,6 +3,8 @@ package com.aconex.eighthundredchallenge.tree;
 import com.aconex.eighthundredchallenge.mapper.CharacterMapper;
 
 /**
+ * Tree graph representation.
+ *
  * Created by aaron.spiteri on 25/09/2016.
  */
 public class TreeFactory {
