@@ -9,6 +9,9 @@ import static com.aconex.eighthundredchallenge.transverser.WordBuilderFactory.cl
 import static com.aconex.eighthundredchallenge.transverser.WordBuilderFactory.createWordBuilder;
 
 /**
+ *
+ * Responsible for transversing the dictionary tree and adding any complete words to the getWords() array.
+ *
  * Created by aaron.spiteri on 26/09/2016.
  */
 public class EightHundredParser {
@@ -16,6 +19,12 @@ public class EightHundredParser {
     private DigitMapper mapper = new DigitMapper();
     private Node root;
 
+    /**
+     * Removes any non numeric characters from numeric string (phone number).
+     *
+     * @param ph
+     * @return formatted phone number
+     */
     public String preParse(String ph) {
         StringBuilder sb = new StringBuilder();
         for (char c : ph.toCharArray()) {
@@ -26,6 +35,13 @@ public class EightHundredParser {
         return sb.toString();
     }
 
+    /**
+     * parse the phone number through the tree and produce results, this method will implicitly call the preParse
+     * method.
+     *
+     * @param ph
+     * @param tree
+     */
     public void parse(String ph, Node tree) {
         ph = preParse(ph);
         root = tree;

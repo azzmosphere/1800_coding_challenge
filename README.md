@@ -54,7 +54,7 @@ L------>L            T
         E
         D
 
-represents the words "CALL", "CALLED", "ME", "MEET"
+represents the words "CALL", "CALLED", "ME", and "MEET"
 
 The LHS branches are known as children, and the RHS branches are known as siblings. 
 
