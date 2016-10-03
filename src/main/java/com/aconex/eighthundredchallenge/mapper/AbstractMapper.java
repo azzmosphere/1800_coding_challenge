@@ -3,6 +3,8 @@ package com.aconex.eighthundredchallenge.mapper;
 import java.util.HashMap;
 
 /**
+ * common base class for mapper classes.
+ *
  * Created by aaron.spiteri on 26/09/2016.
  */
 public class AbstractMapper<T extends EightHundredBitMap> implements Mapper<T> {

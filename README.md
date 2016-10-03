@@ -41,8 +41,15 @@ MatchN
 4.0 OPTIONS
 
  -d [dictionary] the dictionary file to use
+ 
+5.0 BUILD
 
-5.0 DESIGN
+ tar -jxvvf 1800_coding_challenge.tar.bzip2
+ cd 1800_coding_challenge.
+ gradle build
+
+
+6.0 DESIGN
 
 The program first parses the dictionary file into a ordered tree representation.  Each LHS full branch represents a 
 word in the dictionary.  For instance:
@@ -91,7 +98,7 @@ C1ALL-ME
 
 would produce no output.
 
-6.0 CAVEATS
+7.0 CAVEATS
 
 Currently the program reads the dictionary file by slurping all lines into a array, this will not work for large 
 dictionary files.
@@ -99,7 +106,7 @@ dictionary files.
 Creating the dictionary can be expensive with a estimated complexity of O(log n) for insertion.  It would be more 
 efficient to save a representation of the dictionary to file an map it straight into the object.  
 
-7.0 FUTURE IMPLEMENTATIONS
+8.0 FUTURE IMPLEMENTATIONS
 
 * Create a cached dictionary
 * Allow for output to be JSON or another common format so that the progam can be bound to another app as part of a API.

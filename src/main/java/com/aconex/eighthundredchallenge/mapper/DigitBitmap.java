@@ -28,6 +28,8 @@ import static com.aconex.eighthundredchallenge.mapper.CharacterBitmap.C_Y;
 import static com.aconex.eighthundredchallenge.mapper.CharacterBitmap.C_Z;
 
 /**
+ * Digit character mapping.
+ *
  * Created by aaron.spiteri on 26/09/2016.
  */
 public enum DigitBitmap implements EightHundredBitMap {

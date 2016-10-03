@@ -1,6 +1,6 @@
 package com.aconex.eighthundredchallenge.tree;
 
-import com.aconex.eighthundredchallenge.mapper.CharacterBitmap;
+import com.aconex.eighthundredchallenge.mapper.EightHundredBitMap;
 
 /**
  * A graph node for a character in the tree.
@@ -11,14 +11,14 @@ public class Node {
     private Node parent;
     private Node child;
     private Node sibling;
-    private CharacterBitmap characterBitmap;
+    private EightHundredBitMap characterBitmap;
 
     /**
      * Get the character bit map.
      *
      * @return bit map.
      */
-    public CharacterBitmap getCharacterBitmap() {
+    public EightHundredBitMap getCharacterBitmap() {
         return characterBitmap;
     }
 
@@ -27,7 +27,7 @@ public class Node {
      *
      * @param characterBitmap
      */
-    public void setCharacterBitmap(CharacterBitmap characterBitmap) {
+    public void setCharacterBitmap(EightHundredBitMap characterBitmap) {
         this.characterBitmap = characterBitmap;
     }
 
